@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="An educational introduction to magnetoencephalography: signal origin, instrumentation, source modeling, and clinical applications." />
+  <title>MEG Principles and Techniques | MEG-TREC</title>
+  <!-- Favicon: a small dipole contour mark drawn inline so no image file is needed -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f2a44'/%3E%3Cg fill='none' stroke='%235fbfb8' stroke-width='2'%3E%3Cellipse cx='11' cy='16' rx='4' ry='6'/%3E%3Cellipse cx='21' cy='16' rx='4' ry='6'/%3E%3C/g%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ─── NAVIGATION (same block on every page; update the "active" class) ──── -->
+<nav class="site-nav" id="nav">
+  <a href="index.html" class="nav-brand">MEG-TREC<span>Translational Research Consortium</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="board.html">Board</a></li>
+    <li><a href="meetings.html">Meetings</a></li>
+    <li><a href="meg.html" class="nav-cta active" aria-current="page">Learn About MEG</a></li>
+  </ul>
+</nav>
+
+<!-- ─── PAGE HEADER ────────────────────────────────────────────────────────── -->
+<header class="page-header">
+  <span class="eyebrow">Educational Resource</span>
+  <h1>MEG Principles and Techniques</h1>
+  <p>An introduction to magnetoencephalography for clinicians, trainees, and researchers</p>
+  <span class="header-rule"></span>
+</header>
+
+<!-- ─── CONTENT WITH SIDEBAR TABLE OF CONTENTS ─────────────────────────────
+     Each .content-group needs an id that matches a sidebar link so that
+     site.js can highlight the section currently in view.
+     Reference numbers in <sup class="ref"> link to the list at the bottom.
+     ─────────────────────────────────────────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="sidebar-layout">
+
+      <aside class="sidebar">
+        <h3>On This Page</h3>
+        <nav class="sidebar-nav" aria-label="Page sections">
+          <a href="#overview">What Is MEG?</a>
+          <a href="#signal">Origin of the Signal</a>
+          <a href="#shielding">Field Strength and Shielding</a>
+          <a href="#instrumentation">Instrumentation</a>
+          <a href="#acquisition">Recording a Study</a>
+          <a href="#preprocessing">Preprocessing</a>
+          <a href="#source">Source Modeling</a>
+          <a href="#compare">MEG and EEG</a>
+          <a href="#clinical">Clinical Applications</a>
+          <a href="#research">Research Applications</a>
+          <a href="#software">Analysis Software</a>
+          <a href="#references">References</a>
+        </nav>
+      </aside>
+
+      <div class="prose">
+
+        <!-- ── 1. OVERVIEW ─────────────────────────────────────────────── -->
+        <div class="content-group" id="overview">
+          <h2 class="content-group-title">What Is MEG?</h2>
+          <p>Magnetoencephalography (MEG) measures the magnetic fields produced by electrical activity in the brain. Sensors placed just outside the head record these fields with millisecond temporal resolution, and mathematical models are then used to estimate where in the brain the activity arose. MEG is completely noninvasive: it emits nothing and simply listens to the brain's own magnetic signals.<sup class="ref"><a href="#ref1">1,2</a></sup></p>
+          <p>The first recording of the brain's magnetic field was reported by David Cohen in 1968 using an induction coil magnetometer.<sup class="ref"><a href="#ref3">3</a></sup> In 1972 he recorded the alpha rhythm with a superconducting quantum interference device (SQUID) inside a magnetically shielded room, the basic arrangement that most clinical systems still use.<sup class="ref"><a href="#ref4">4</a></sup> Modern whole head systems contain a few hundred sensors arranged in a helmet that covers the scalp.</p>
+          <div class="callout">
+            <strong>In one sentence:</strong> MEG offers the temporal resolution of EEG with spatial information that is less distorted by the skull and scalp, at the cost of more demanding instrumentation.
+          </div>
+        </div>
+
+        <!-- ── 2. SIGNAL ORIGIN ────────────────────────────────────────── -->
+        <div class="content-group" id="signal">
+          <h2 class="content-group-title">Origin of the Signal</h2>
+          <p>The MEG signal arises mainly from postsynaptic currents flowing within the apical dendrites of cortical pyramidal neurons. These cells are aligned in parallel, perpendicular to the cortical surface, so when many of them receive synchronous synaptic input their intracellular currents (the "primary currents") add together. A useful approximation for such a patch of cortex is an equivalent current dipole.<sup class="ref"><a href="#ref1">1</a></sup></p>
+          <p>A measurable MEG signal requires synchronous activity across a cortical patch that typically contains on the order of tens of thousands of neurons.<sup class="ref"><a href="#ref5">5</a></sup> Action potentials contribute relatively little because they are brief and their current pattern resembles a quadrupole, whose field falls off rapidly with distance.</p>
+
+          <h3>Orientation matters</h3>
+          <p>In a spherically symmetric conductor, a dipole that points radially (directly toward the sensors) produces no magnetic field outside the head.<sup class="ref"><a href="#ref6">6</a></sup> MEG is therefore most sensitive to tangential sources, such as those on the walls of sulci, and relatively insensitive to purely radial sources at the crowns of gyri. The real head is not a perfect sphere, so this is a matter of degree rather than an absolute rule. EEG, in contrast, detects both orientations, which is one reason the two methods are complementary.</p>
+
+          <!-- Figure: cortical fold with tangential and radial dipoles -->
+          <figure class="figure">
+            <svg viewBox="0 0 640 300" role="img" aria-label="Diagram of a cortical fold showing a tangential dipole on a sulcal wall and a radial dipole on a gyral crown beneath MEG sensors">
+              <defs>
+                <marker id="arrowTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M0 0L10 5L0 10z" fill="#157a7a"/>
+                </marker>
+                <marker id="arrowGrey" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M0 0L10 5L0 10z" fill="#7a8a96"/>
+                </marker>
+              </defs>
+              <!-- Sensors above the head surface -->
+              <g fill="#0f2a44">
+                <rect x="60"  y="18" width="36" height="14" rx="3"/>
+                <rect x="160" y="18" width="36" height="14" rx="3"/>
+                <rect x="260" y="18" width="36" height="14" rx="3"/>
+                <rect x="360" y="18" width="36" height="14" rx="3"/>
+                <rect x="460" y="18" width="36" height="14" rx="3"/>
+                <rect x="560" y="18" width="36" height="14" rx="3"/>
+              </g>
+              <text x="320" y="12" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#4a5a68">MEG sensors</text>
+              <!-- Scalp and skull -->
+              <path d="M0 62 H640" stroke="#c9a98a" stroke-width="10"/>
+              <path d="M0 80 H640" stroke="#d6e2e6" stroke-width="14"/>
+              <text x="630" y="58" text-anchor="end" font-family="Inter, sans-serif" font-size="10" fill="#4a5a68">scalp</text>
+              <text x="630" y="84" text-anchor="end" font-family="Inter, sans-serif" font-size="10" fill="#4a5a68">skull</text>
+              <!-- Cortical surface with one sulcus -->
+              <path d="M0 120 H250 C275 120 285 135 285 160 V250 C285 275 335 275 335 250 V160 C335 135 345 120 370 120 H640"
+                    fill="none" stroke="#1d4e6e" stroke-width="3"/>
+              <text x="40" y="112" font-family="Inter, sans-serif" font-size="10" fill="#4a5a68">cortical surface</text>
+              <!-- Tangential dipole on the sulcal wall (points horizontally) -->
+              <line x1="292" y1="200" x2="330" y2="200" stroke="#157a7a" stroke-width="4" marker-end="url(#arrowTeal)"/>
+              <!-- Field lines circling the tangential dipole -->
+              <ellipse cx="310" cy="200" rx="10" ry="28" fill="none" stroke="#157a7a" stroke-dasharray="4 3"/>
+              <ellipse cx="310" cy="200" rx="18" ry="52" fill="none" stroke="#157a7a" stroke-opacity=".6" stroke-dasharray="4 3"/>
+              <text x="372" y="196" font-family="Inter, sans-serif" font-size="11" fill="#157a7a">Tangential source (sulcal wall):</text>
+              <text x="372" y="211" font-family="Inter, sans-serif" font-size="11" fill="#157a7a">field exits the head, detected by MEG</text>
+              <!-- Radial dipole at the crown of a gyrus (points upward) -->
+              <line x1="140" y1="170" x2="140" y2="128" stroke="#7a8a96" stroke-width="4" marker-end="url(#arrowGrey)"/>
+              <text x="70" y="192" font-family="Inter, sans-serif" font-size="11" fill="#7a8a96">Radial source (gyral crown):</text>
+              <text x="70" y="207" font-family="Inter, sans-serif" font-size="11" fill="#7a8a96">little or no external field</text>
+            </svg>
+            <figcaption>Figure 1. Source orientation and MEG sensitivity. Pyramidal cell currents flow perpendicular to the cortical surface. Sources on sulcal walls are oriented tangentially to the scalp and produce fields that the sensors detect; sources on gyral crowns are oriented radially and produce little external magnetic field in a spherical head.</figcaption>
+          </figure>
+        </div>
+
+        <!-- ── 3. FIELD STRENGTH AND SHIELDING ─────────────────────────── -->
+        <div class="content-group" id="shielding">
+          <h2 class="content-group-title">Field Strength and Shielding</h2>
+          <p>Brain magnetic fields are extremely small, in the range of tens to a few thousand femtotesla (1 fT = 10<sup>&minus;15</sup> tesla). The Earth's static field is roughly a billion times stronger, and the fluctuating fields from traffic, elevators, and power lines are also much larger than the brain signal.<sup class="ref"><a href="#ref1">1</a></sup> Recording MEG therefore depends on several layers of noise reduction:</p>
+          <ul class="bullets">
+            <li><strong>Magnetically shielded rooms</strong> built from layers of high permeability alloy (mu metal) and aluminum attenuate external fields.</li>
+            <li><strong>Gradiometer sensors</strong> respond to differences in field over a short distance, which suppresses distant noise sources while preserving nearby brain signals.</li>
+            <li><strong>Reference sensors and software methods</strong> such as signal space separation remove residual interference after recording (see <a href="#preprocessing">Preprocessing</a>).</li>
+          </ul>
+
+          <!-- Figure: logarithmic scale of magnetic field magnitudes -->
+          <figure class="figure">
+            <svg viewBox="0 55 640 160" role="img" aria-label="Logarithmic scale comparing magnetic field strengths from the Earth's field to the brain signal">
+              <!-- Axis: 10^-4 T at x=40 down to 10^-15 T at x=600; 50.9 px per decade -->
+              <line x1="40" y1="120" x2="600" y2="120" stroke="#0f2a44" stroke-width="2"/>
+              <g font-family="Inter, sans-serif" font-size="10" fill="#4a5a68" text-anchor="middle">
+                <line x1="40"  y1="114" x2="40"  y2="126" stroke="#0f2a44"/><text x="40"  y="142">10⁻⁴</text>
+                <line x1="142" y1="114" x2="142" y2="126" stroke="#0f2a44"/><text x="142" y="142">10⁻⁶</text>
+                <line x1="244" y1="114" x2="244" y2="126" stroke="#0f2a44"/><text x="244" y="142">10⁻⁸</text>
+                <line x1="345" y1="114" x2="345" y2="126" stroke="#0f2a44"/><text x="345" y="142">10⁻¹⁰</text>
+                <line x1="447" y1="114" x2="447" y2="126" stroke="#0f2a44"/><text x="447" y="142">10⁻¹²</text>
+                <line x1="549" y1="114" x2="549" y2="126" stroke="#0f2a44"/><text x="549" y="142">10⁻¹⁴</text>
+                <line x1="600" y1="114" x2="600" y2="126" stroke="#0f2a44"/><text x="600" y="142">10⁻¹⁵</text>
+                <text x="320" y="162" font-size="11">magnetic flux density (tesla, logarithmic)</text>
+              </g>
+              <!-- Labeled ranges (approximate, after Hämäläinen et al. 1993) -->
+              <g font-family="Inter, sans-serif" font-size="11">
+                <!-- Earth's field about 5e-5 T -->
+                <rect x="50" y="88" width="24" height="10" fill="#7a8a96"/>
+                <text x="62" y="80" text-anchor="middle" fill="#4a5a68">Earth's field</text>
+                <!-- Urban magnetic noise about 1e-8 to 1e-6 T -->
+                <rect x="142" y="88" width="102" height="10" fill="#9cc3e6"/>
+                <text x="193" y="80" text-anchor="middle" fill="#4a5a68">urban magnetic noise</text>
+                <!-- Heart (MCG) about 1e-10 T -->
+                <rect x="335" y="88" width="20" height="10" fill="#1d4e6e"/>
+                <text x="345" y="80" text-anchor="middle" fill="#4a5a68">heart</text>
+                <!-- Spontaneous brain activity about 1e-12 T; evoked responses about 1e-13 T -->
+                <rect x="437" y="88" width="62" height="10" fill="#157a7a"/>
+                <text x="468" y="80" text-anchor="middle" fill="#157a7a" font-weight="600">brain</text>
+                <!-- SQUID sensor noise, a few fT per root Hz, about 1e-15 to 1e-14 -->
+                <rect x="560" y="88" width="40" height="10" fill="#0f2a44"/>
+                <text x="580" y="80" text-anchor="middle" fill="#4a5a68">sensor noise</text>
+              </g>
+              <text x="320" y="200" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7a8a96">Values are approximate orders of magnitude.</text>
+            </svg>
+            <figcaption>Figure 2. Approximate magnitudes of magnetic fields relevant to MEG. The brain signal is many orders of magnitude smaller than environmental fields, which is why shielding and gradiometers are required. Magnitudes after Hämäläinen et al.<sup class="ref"><a href="#ref1">1</a></sup></figcaption>
+          </figure>
+        </div>
+
+        <!-- ── 4. INSTRUMENTATION ──────────────────────────────────────── -->
+        <div class="content-group" id="instrumentation">
+          <h2 class="content-group-title">Instrumentation</h2>
+          <h3>SQUID sensors</h3>
+          <p>Conventional MEG systems detect magnetic fields with SQUIDs, superconducting circuits that convert very small changes in magnetic flux into a measurable voltage. Each SQUID is coupled to a pickup coil (the "flux transformer") whose geometry determines what the sensor measures. SQUIDs must be kept superconducting at about 4 kelvin, so the sensors sit in a helmet shaped dewar filled with liquid helium, typically 2 to 3 cm from the scalp.<sup class="ref"><a href="#ref1">1,2</a></sup></p>
+
+          <h3>Pickup coil geometries</h3>
+          <ul class="bullets">
+            <li><strong>Magnetometers</strong> use a single loop and measure the field component through it. They are sensitive to deep sources and also to distant noise.</li>
+            <li><strong>Axial gradiometers</strong> use two coaxial loops wound in opposite directions, so that uniform fields cancel and fields from nearby sources remain.</li>
+            <li><strong>Planar gradiometers</strong> use a figure eight coil that measures the field gradient along the scalp. They give their largest signal directly over a source and are less sensitive to deep sources.</li>
+          </ul>
+          <p>Commercial systems differ in how they combine these. For example, MEGIN (formerly Elekta Neuromag) systems contain 306 channels at 102 locations, each with one magnetometer and two orthogonal planar gradiometers, while CTF systems use roughly 275 axial gradiometers.</p>
+
+          <!-- Figure: three pickup coil geometries -->
+          <figure class="figure">
+            <svg viewBox="0 0 640 210" role="img" aria-label="Schematic of magnetometer, axial gradiometer and planar gradiometer pickup coils">
+              <g fill="none" stroke="#157a7a" stroke-width="3">
+                <!-- Magnetometer: one loop -->
+                <ellipse cx="110" cy="120" rx="50" ry="16"/>
+                <!-- Axial gradiometer: two loops stacked, joined by leads -->
+                <ellipse cx="320" cy="70"  rx="50" ry="16"/>
+                <ellipse cx="320" cy="150" rx="50" ry="16"/>
+                <line x1="270" y1="70" x2="270" y2="150" stroke-width="1.5"/>
+                <line x1="370" y1="70" x2="370" y2="150" stroke-width="1.5"/>
+                <!-- Planar gradiometer: figure eight in one plane -->
+                <path d="M470 105 h45 v30 h-45 z M515 105 h45 v30 h-45 z"/>
+              </g>
+              <!-- Winding direction markers -->
+              <g font-family="Inter, sans-serif" font-size="16" fill="#0f2a44" text-anchor="middle">
+                <text x="388" y="66">+</text><text x="388" y="146">&minus;</text>
+                <text x="492" y="126">+</text><text x="537" y="126">&minus;</text>
+              </g>
+              <g font-family="Inter, sans-serif" font-size="12" fill="#0f2a44" text-anchor="middle" font-weight="600">
+                <text x="110" y="196">Magnetometer</text>
+                <text x="320" y="196">Axial gradiometer</text>
+                <text x="515" y="196">Planar gradiometer</text>
+              </g>
+              <text x="320" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7a8a96">scalp is toward the bottom of each coil</text>
+            </svg>
+            <figcaption>Figure 3. Common pickup coil designs. Opposite winding (+ and &minus;) in gradiometers cancels fields that are uniform across the coil, suppressing distant noise.</figcaption>
+          </figure>
+
+          <h3>Optically pumped magnetometers</h3>
+          <p>Optically pumped magnetometers (OPMs) measure magnetic fields using the response of a heated alkali vapor to laser light. They do not require cryogenic cooling, so they can be mounted directly on the scalp in a wearable helmet. Placing sensors closer to the head increases signal amplitude and allows recording while the participant moves.<sup class="ref"><a href="#ref7">7</a></sup> OPMs operate near zero background field, so they are typically used in shielded rooms with additional field nulling coils. OPM systems are an active area of development and are not yet as widely used clinically as SQUID systems.</p>
+        </div>
+
+        <!-- ── 5. ACQUISITION ──────────────────────────────────────────── -->
+        <div class="content-group" id="acquisition">
+          <h2 class="content-group-title">Recording a Study</h2>
+          <p>A typical clinical or research MEG session includes the following steps:<sup class="ref"><a href="#ref8">8,9</a></sup></p>
+          <ul class="bullets">
+            <li><strong>Screening</strong> for metal on or in the body (dental work, implants, clothing, makeup) that may create magnetic artifacts.</li>
+            <li><strong>Head digitization.</strong> Anatomical landmarks (the nasion and the two preauricular points), the positions of head position indicator (HPI) coils, and several hundred points on the scalp are recorded with a 3D digitizer. These are later used to align the MEG data with the patient's MRI.</li>
+            <li><strong>Head position tracking.</strong> Small currents in the HPI coils let the system locate the head within the helmet, at the start of a run or continuously, so that head movement can be measured and compensated.</li>
+            <li><strong>Recording.</strong> Spontaneous activity is recorded at rest and, for epilepsy evaluations, often during drowsiness and sleep to capture interictal discharges. Simultaneous EEG and electrocardiography are commonly recorded. Evoked response protocols (somatosensory, auditory, visual, motor, and language tasks) are added for functional mapping.</li>
+          </ul>
+        </div>
+
+        <!-- ── 6. PREPROCESSING ────────────────────────────────────────── -->
+        <div class="content-group" id="preprocessing">
+          <h2 class="content-group-title">Noise Reduction and Preprocessing</h2>
+          <p>Before source analysis, data are cleaned of interference and physiological artifacts. Common steps include:</p>
+          <ul class="bullets">
+            <li><strong>Signal space separation (SSS) and its temporal extension (tSSS).</strong> These methods use the geometry of the sensor array to separate fields originating inside the sensor helmet from those originating outside it, and can also correct for head movement.<sup class="ref"><a href="#ref10">10</a></sup></li>
+            <li><strong>Signal space projection (SSP) and independent component analysis (ICA)</strong> to remove cardiac, eye blink, and other stereotyped artifacts.</li>
+            <li><strong>Filtering</strong> to the frequency band of interest, and marking or rejecting segments with movement or muscle artifact.</li>
+          </ul>
+          <p>Good practice recommendations for acquisition, analysis, and reporting are summarized by Gross and colleagues.<sup class="ref"><a href="#ref9">9</a></sup></p>
+        </div>
+
+        <!-- ── 7. SOURCE MODELING ──────────────────────────────────────── -->
+        <div class="content-group" id="source">
+          <h2 class="content-group-title">Source Modeling</h2>
+          <p>Estimating brain activity from MEG involves two related problems.</p>
+
+          <h3>The forward problem</h3>
+          <p>The forward model predicts the field each sensor would measure for a source at a given location and orientation. It requires the sensor positions, the coregistration between MEG and MRI, and a model of the head. Because magnetic fields are less affected than electric potentials by the conductivity of the skull and scalp, relatively simple head models (a single sphere or overlapping local spheres) often work well for MEG. Boundary element models built from the patient's MRI provide a more realistic geometry.<sup class="ref"><a href="#ref1">1,2</a></sup></p>
+
+          <h3>The inverse problem</h3>
+          <p>The inverse problem estimates the sources that produced the measured fields. It has no unique solution: different combinations of sources inside the head can produce the same field outside it, a result first shown by Helmholtz in the nineteenth century. Each inverse method therefore adds assumptions to arrive at a single answer, and understanding those assumptions is essential when interpreting results.</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Approach</th><th>Main assumption</th><th>Typical uses</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Equivalent current dipole (ECD)</strong></td>
+                  <td>Activity is focal and can be represented by one or a few dipoles.</td>
+                  <td>Interictal epileptiform discharges; early evoked responses. The standard clinical method for spike localization.<sup class="ref"><a href="#ref8">8</a></sup></td>
+                </tr>
+                <tr>
+                  <td><strong>Distributed minimum norm methods</strong> (MNE, dSPM, sLORETA)</td>
+                  <td>Activity is spread across many cortical locations; the solution with the least overall current is preferred, with various normalizations.</td>
+                  <td>Spatially extended activity; group studies; time courses of cortical activity.<sup class="ref"><a href="#ref11">11</a></sup></td>
+                </tr>
+                <tr>
+                  <td><strong>Beamformers</strong> (LCMV, DICS, SAM)</td>
+                  <td>Activity at different locations is not strongly correlated over time.</td>
+                  <td>Oscillatory activity; ictal and interictal analyses; connectivity.<sup class="ref"><a href="#ref12">12</a></sup></td>
+                </tr>
+                <tr>
+                  <td><strong>Maximum entropy on the mean (MEM)</strong></td>
+                  <td>Activity is organized in cortical parcels that are either active or inactive.</td>
+                  <td>Estimating the spatial extent of sources, including epileptic generators.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Figure: analysis pipeline -->
+          <figure class="figure">
+            <svg viewBox="0 0 640 120" role="img" aria-label="MEG analysis pipeline from acquisition to interpretation">
+              <defs>
+                <marker id="arrowNavy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M0 0L10 5L0 10z" fill="#0f2a44"/>
+                </marker>
+              </defs>
+              <!-- Five boxes, 104 px wide, 128 px apart -->
+              <g font-family="Inter, sans-serif" font-size="11" text-anchor="middle">
+                <rect x="8"   y="30" width="104" height="54" rx="4" fill="#0f2a44"/>
+                <text x="60"  y="53" fill="#fff">Acquisition</text><text x="60" y="68" fill="#5fbfb8" font-size="9">MEG, EEG, HPI</text>
+                <rect x="136" y="30" width="104" height="54" rx="4" fill="#1d4e6e"/>
+                <text x="188" y="53" fill="#fff">Preprocessing</text><text x="188" y="68" fill="#5fbfb8" font-size="9">tSSS, ICA, filters</text>
+                <rect x="264" y="30" width="104" height="54" rx="4" fill="#1d4e6e"/>
+                <text x="316" y="53" fill="#fff">Coregistration</text><text x="316" y="68" fill="#5fbfb8" font-size="9">MEG to MRI</text>
+                <rect x="392" y="30" width="104" height="54" rx="4" fill="#1d4e6e"/>
+                <text x="444" y="53" fill="#fff">Forward model</text><text x="444" y="68" fill="#5fbfb8" font-size="9">sphere or BEM</text>
+                <rect x="520" y="30" width="112" height="54" rx="4" fill="#157a7a"/>
+                <text x="576" y="53" fill="#fff">Inverse solution</text><text x="576" y="68" fill="#e9f1f3" font-size="9">ECD, MNE, beamformer</text>
+              </g>
+              <g stroke="#0f2a44" stroke-width="1.5" marker-end="url(#arrowNavy)">
+                <line x1="112" y1="57" x2="134" y2="57"/>
+                <line x1="240" y1="57" x2="262" y2="57"/>
+                <line x1="368" y1="57" x2="390" y2="57"/>
+                <line x1="496" y1="57" x2="518" y2="57"/>
+              </g>
+            </svg>
+            <figcaption>Figure 4. A typical MEG source analysis pipeline.</figcaption>
+          </figure>
+        </div>
+
+        <!-- ── 8. MEG VS EEG ───────────────────────────────────────────── -->
+        <div class="content-group" id="compare">
+          <h2 class="content-group-title">MEG and EEG</h2>
+          <p>MEG and EEG measure the same underlying neuronal currents and are best viewed as complementary. Recording both at once is common.<sup class="ref"><a href="#ref2">2</a></sup></p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Feature</th><th>MEG</th><th>EEG</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Temporal resolution</td><td>Milliseconds</td><td>Milliseconds</td></tr>
+                <tr><td>Source orientation</td><td>Mainly tangential sources</td><td>Tangential and radial sources</td></tr>
+                <tr><td>Effect of skull and scalp</td><td>Small; fields pass through with little distortion</td><td>Substantial smearing of potentials</td></tr>
+                <tr><td>Reference</td><td>Reference free</td><td>Depends on reference choice</td></tr>
+                <tr><td>Sensitivity to deep sources</td><td>Lower</td><td>Somewhat higher</td></tr>
+                <tr><td>Long term monitoring</td><td>Generally limited to hours</td><td>Days, including ambulatory and implanted systems</td></tr>
+                <tr><td>Cost and availability</td><td>High cost; available at specialized centers</td><td>Low cost; widely available</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── 9. CLINICAL ─────────────────────────────────────────────── -->
+        <div class="content-group" id="clinical">
+          <h2 class="content-group-title">Clinical Applications</h2>
+          <h3>Presurgical evaluation of epilepsy</h3>
+          <p>The most common clinical use of MEG is localizing interictal epileptiform discharges in patients with drug resistant focal epilepsy who are being considered for surgery. Dipoles fitted to individual spikes are displayed on the patient's MRI, and a tight cluster of dipoles with consistent orientation supports a focal generator. MEG findings can direct a second look at an MRI that was initially read as normal, help generate hypotheses for intracranial electrode placement such as stereo EEG, and add confidence when concordant with other tests.<sup class="ref"><a href="#ref8">8</a></sup> Seizures are occasionally captured during MEG and can also be analyzed.</p>
+
+          <h3>Presurgical functional mapping</h3>
+          <p>MEG can identify eloquent cortex before resection of tumors, vascular lesions, or epileptic foci, reducing the risk of postoperative deficits. Established protocols map somatosensory cortex with median nerve or tactile stimulation, auditory cortex with tones, visual cortex with patterned stimuli, and motor cortex with voluntary movement. Language tasks can help establish hemispheric dominance and localize receptive language areas, often as a complement to other methods such as functional MRI or the intracarotid amobarbital procedure.</p>
+
+          <div class="callout">
+            <strong>Clinical guidelines.</strong> The American Clinical Magnetoencephalography Society (ACMEGS) has published clinical practice guidelines for recording and analyzing spontaneous activity and for presurgical functional mapping.<sup class="ref"><a href="#ref8">8</a></sup>
+          </div>
+        </div>
+
+        <!-- ── 10. RESEARCH ────────────────────────────────────────────── -->
+        <div class="content-group" id="research">
+          <h2 class="content-group-title">Research Applications</h2>
+          <p>Because MEG tracks neural activity directly and with high temporal resolution, it is widely used to study brain oscillations and how brain regions interact. Areas represented at MEG-TREC meetings include:</p>
+          <ul class="bullets">
+            <li><strong>Functional connectivity and networks,</strong> including network measures as potential biomarkers.</li>
+            <li><strong>Neurodevelopment,</strong> where wearable OPM systems may allow recording in young children who cannot stay still.</li>
+            <li><strong>Aging and neurodegenerative disease,</strong> where network changes may precede clinical symptoms.</li>
+            <li><strong>Multimodal integration</strong> of MEG with EEG, structural MRI, and functional imaging.</li>
+            <li><strong>Brain computer interfaces</strong> that decode brain activity in real time.</li>
+          </ul>
+        </div>
+
+        <!-- ── 11. SOFTWARE ────────────────────────────────────────────── -->
+        <div class="content-group" id="software">
+          <h2 class="content-group-title">Analysis Software</h2>
+          <p>In addition to the clinical software supplied by MEG manufacturers, several open source packages are widely used. Each offers tutorials with sample data:</p>
+          <ul class="bullets">
+            <li><a href="https://neuroimage.usc.edu/brainstorm/" target="_blank" rel="noopener">Brainstorm</a>: a graphical application (MATLAB based, with a compiled version) for MEG, EEG, and intracranial EEG analysis.</li>
+            <li><a href="https://mne.tools/" target="_blank" rel="noopener">MNE-Python</a>: a Python package covering preprocessing, source estimation, and statistics.</li>
+            <li><a href="https://www.fieldtriptoolbox.org/" target="_blank" rel="noopener">FieldTrip</a>: a MATLAB toolbox for MEG, EEG, and invasive electrophysiology.</li>
+            <li><a href="https://www.fil.ion.ucl.ac.uk/spm/" target="_blank" rel="noopener">SPM</a>: statistical parametric mapping, including MEG and EEG source reconstruction and dynamic causal modeling.</li>
+          </ul>
+        </div>
+
+        <!-- ── 12. REFERENCES ──────────────────────────────────────────── -->
+        <div class="content-group" id="references">
+          <h2 class="content-group-title">References and Further Reading</h2>
+          <ol class="refs">
+            <li id="ref1">Hämäläinen M, Hari R, Ilmoniemi RJ, Knuutila J, Lounasmaa OV. Magnetoencephalography: theory, instrumentation, and applications to noninvasive studies of the working human brain. <em>Rev Mod Phys.</em> 1993;65:413&ndash;497. <a href="https://doi.org/10.1103/RevModPhys.65.413" target="_blank" rel="noopener">doi:10.1103/RevModPhys.65.413</a></li>
+            <li id="ref2">Baillet S. Magnetoencephalography for brain electrophysiology and imaging. <em>Nat Neurosci.</em> 2017;20:327&ndash;339. <a href="https://doi.org/10.1038/nn.4504" target="_blank" rel="noopener">doi:10.1038/nn.4504</a></li>
+            <li id="ref3">Cohen D. Magnetoencephalography: evidence of magnetic fields produced by alpha rhythm currents. <em>Science.</em> 1968;161:784&ndash;786. <a href="https://doi.org/10.1126/science.161.3843.784" target="_blank" rel="noopener">doi:10.1126/science.161.3843.784</a></li>
+            <li id="ref4">Cohen D. Magnetoencephalography: detection of the brain's electrical activity with a superconducting magnetometer. <em>Science.</em> 1972;175:664&ndash;666. <a href="https://doi.org/10.1126/science.175.4022.664" target="_blank" rel="noopener">doi:10.1126/science.175.4022.664</a></li>
+            <li id="ref5">Murakami S, Okada Y. Contributions of principal neocortical neurons to magnetoencephalography and electroencephalography signals. <em>J Physiol.</em> 2006. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Contributions+of+principal+neocortical+neurons+to+magnetoencephalography+and+electroencephalography+signals" target="_blank" rel="noopener">PubMed</a></li>
+            <li id="ref6">Sarvas J. Basic mathematical and electromagnetic concepts of the biomagnetic inverse problem. <em>Phys Med Biol.</em> 1987;32:11&ndash;22. <a href="https://doi.org/10.1088/0031-9155/32/1/004" target="_blank" rel="noopener">doi:10.1088/0031-9155/32/1/004</a></li>
+            <li id="ref7">Boto E, Holmes N, Leggett J, et al. Moving magnetoencephalography towards real-world applications with a wearable system. <em>Nature.</em> 2018;555:657&ndash;661. <a href="https://doi.org/10.1038/nature26147" target="_blank" rel="noopener">doi:10.1038/nature26147</a></li>
+            <li id="ref8">Bagić AI, Knowlton RC, Rose DF, Ebersole JS. American Clinical Magnetoencephalography Society Clinical Practice Guideline 1: recording and analysis of spontaneous cerebral activity. <em>J Clin Neurophysiol.</em> 2011. <a href="https://doi.org/10.1097/WNP.0b013e3182272fed" target="_blank" rel="noopener">doi:10.1097/WNP.0b013e3182272fed</a>. Additional ACMEGS guidelines: <a href="https://www.acmegs.org/" target="_blank" rel="noopener">acmegs.org</a></li>
+            <li id="ref9">Gross J, Baillet S, Barnes GR, et al. Good practice for conducting and reporting MEG research. <em>NeuroImage.</em> 2013;65:349&ndash;363. <a href="https://doi.org/10.1016/j.neuroimage.2012.10.001" target="_blank" rel="noopener">doi:10.1016/j.neuroimage.2012.10.001</a></li>
+            <li id="ref10">Taulu S, Simola J. Spatiotemporal signal space separation method for rejecting nearby interference in MEG measurements. <em>Phys Med Biol.</em> 2006;51:1759&ndash;1768. <a href="https://doi.org/10.1088/0031-9155/51/7/008" target="_blank" rel="noopener">doi:10.1088/0031-9155/51/7/008</a></li>
+            <li id="ref11">Dale AM, Liu AK, Fischl BR, et al. Dynamic statistical parametric mapping: combining fMRI and MEG for high-resolution imaging of cortical activity. <em>Neuron.</em> 2000;26:55&ndash;67. <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Dynamic+statistical+parametric+mapping+combining+fMRI+and+MEG" target="_blank" rel="noopener">PubMed</a></li>
+            <li id="ref12">Van Veen BD, van Drongelen W, Yuchtman M, Suzuki A. Localization of brain electrical activity via linearly constrained minimum variance spatial filtering. <em>IEEE Trans Biomed Eng.</em> 1997;44:867&ndash;880. <a href="https://doi.org/10.1109/10.623056" target="_blank" rel="noopener">doi:10.1109/10.623056</a></li>
+            <li>Hari R, Puce A. <em>MEG-EEG Primer.</em> Oxford University Press. A textbook introduction to both methods.</li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER (same block on every page) ──────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">MEG<span>-TREC</span></div>
+        <p class="footer-tagline">MEG Translational Research Consortium</p>
+        <p style="margin-top:1rem;font-size:.92rem">Formerly the MEG Texas Consortium</p>
+      </div>
+      <div class="footer-col">
+        <h4>Consortium</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="board.html">Board Members</a></li>
+          <li><a href="meetings.html">Annual Meetings</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="meg.html#signal">The MEG Signal</a></li>
+          <li><a href="meg.html#instrumentation">Instrumentation</a></li>
+          <li><a href="meg.html#source">Source Modeling</a></li>
+          <li><a href="meg.html#clinical">Clinical Applications</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 MEG Translational Research Consortium</span>
+      <span>MEG-TREC</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

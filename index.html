@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The MEG Translational Research Consortium (MEG-TREC) brings together clinicians, researchers, and industry partners working to advance magnetoencephalography in research and patient care." />
+  <title>MEG-TREC | MEG Translational Research Consortium</title>
+  <!-- Favicon: a small dipole contour mark drawn inline so no image file is needed -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f2a44'/%3E%3Cg fill='none' stroke='%235fbfb8' stroke-width='2'%3E%3Cellipse cx='11' cy='16' rx='4' ry='6'/%3E%3Cellipse cx='21' cy='16' rx='4' ry='6'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── HERO (home page only) ───────────────────────────────────────────────── */
+    .hero {
+      min-height: 92svh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 70% 40%, var(--ocean) 0%, var(--navy) 45%, var(--navy-deep) 100%);
+    }
+    /* Decorative field map sits behind the text */
+    .hero-art {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: .4;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: calc(var(--nav-h) + 2rem) 1.5rem 3rem;
+      max-width: 860px;
+    }
+    .hero-eyebrow {
+      font-family: var(--ff-sans);
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      display: block;
+      margin-bottom: 1.25rem;
+      animation: fadeUp .8s .2s both;
+    }
+    .hero-title {
+      font-family: var(--ff-display);
+      font-size: clamp(2.4rem, 6.5vw, 4.75rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.08;
+      animation: fadeUp .9s .4s both;
+    }
+    .hero-title em { color: var(--teal-light); font-style: normal; }
+    .hero-subtitle {
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+      color: rgba(255,255,255,.8);
+      margin-top: 1.25rem;
+      animation: fadeUp .9s .6s both;
+    }
+    .hero-divider {
+      width: 60px; height: 1px;
+      background: var(--teal-light);
+      margin: 2rem auto;
+      animation: fadeIn .6s .8s both;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp .8s .95s both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-eyebrow, .hero-title, .hero-subtitle, .hero-divider, .hero-actions { animation: none; }
+    }
+
+    /* ── MEETING CARD ────────────────────────────────────────────────────────── */
+    .meeting-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--teal);
+      border-radius: var(--r);
+      padding: 2rem 2.25rem;
+      max-width: 760px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-sm);
+    }
+    .meeting-card h3 {
+      font-family: var(--ff-display);
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: .35rem;
+    }
+    .meeting-meta {
+      font-family: var(--ff-sans);
+      font-size: .85rem;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION (same block on every page; update the "active" class) ──── -->
+<nav class="site-nav" id="nav">
+  <a href="index.html" class="nav-brand">MEG-TREC<span>Translational Research Consortium</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="board.html">Board</a></li>
+    <li><a href="meetings.html">Meetings</a></li>
+    <li><a href="meg.html" class="nav-cta">Learn About MEG</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ───────────────────────────────────────────────────────────────── -->
+<section class="hero" id="top">
+  <!-- Decorative artwork: a top view of a sensor array with the isofield
+       contours of a single current dipole (outflux and influx lobes). -->
+  <svg class="hero-art" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke-width="1.2">
+      <!-- Outflux lobe -->
+      <g stroke="#5fbfb8">
+        <ellipse cx="840" cy="330" rx="40"  ry="62"  stroke-opacity=".55"/>
+        <ellipse cx="840" cy="330" rx="80"  ry="118" stroke-opacity=".42"/>
+        <ellipse cx="840" cy="330" rx="122" ry="170" stroke-opacity=".30"/>
+        <ellipse cx="840" cy="330" rx="166" ry="222" stroke-opacity=".20"/>
+      </g>
+      <!-- Influx lobe -->
+      <g stroke="#9cc3e6">
+        <ellipse cx="1040" cy="330" rx="40"  ry="62"  stroke-opacity=".55"/>
+        <ellipse cx="1040" cy="330" rx="80"  ry="118" stroke-opacity=".42"/>
+        <ellipse cx="1040" cy="330" rx="122" ry="170" stroke-opacity=".30"/>
+        <ellipse cx="1040" cy="330" rx="166" ry="222" stroke-opacity=".20"/>
+      </g>
+      <!-- Head outline and nose marker -->
+      <circle cx="940" cy="360" r="300" stroke="#ffffff" stroke-opacity=".12"/>
+      <path d="M915 62 L940 30 L965 62" stroke="#ffffff" stroke-opacity=".12"/>
+    </g>
+    <!-- Sensor positions on concentric rings (drawn by the script below) -->
+    <g id="sensorDots" fill="#ffffff" fill-opacity=".18"></g>
+  </svg>
+
+  <div class="hero-content">
+    <span class="hero-eyebrow">MEG Translational Research Consortium</span>
+    <h1 class="hero-title">Advancing <em>MEG</em><br>from the Laboratory<br>to the Clinic</h1>
+    <p class="hero-subtitle">A national network of clinicians, scientists, and industry partners<br>working in magnetoencephalography</p>
+    <div class="hero-divider"></div>
+    <div class="hero-actions">
+      <a href="about.html" class="btn btn-primary">About the Consortium</a>
+      <a href="meg.html" class="btn btn-outline">Learn About MEG</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HIGHLIGHTS ─────────────────────────────────────────────────────────── -->
+<section class="section section-alt" id="highlights">
+  <div class="container">
+    <div class="highlights-grid">
+      <div class="highlight-card fade-in">
+        <svg class="highlight-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 22h7l3-8 5 16 4-12 3 4h10"/>
+        </svg>
+        <h3>Clinical Care</h3>
+        <p>Sharing experience in clinical MEG, including presurgical evaluation for epilepsy and functional mapping before neurosurgery.</p>
+      </div>
+      <div class="highlight-card fade-in" style="transition-delay:.12s">
+        <svg class="highlight-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/><circle cx="28" cy="12" r="4"/><circle cx="20" cy="29" r="4"/>
+          <path d="M15.5 14l3 11M24.5 14l-3 11M16 12h8"/>
+        </svg>
+        <h3>Translational Research</h3>
+        <p>Connecting research groups studying brain networks across development, aging, epilepsy, and neurodegenerative disease.</p>
+      </div>
+      <div class="highlight-card fade-in" style="transition-delay:.24s">
+        <svg class="highlight-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M8 26a12 12 0 0 1 24 0"/><path d="M8 26v4h24v-4"/>
+          <circle cx="13" cy="19" r="1.5"/><circle cx="20" cy="15" r="1.5"/><circle cx="27" cy="19" r="1.5"/>
+        </svg>
+        <h3>Technology</h3>
+        <p>Following new sensor technologies, including wearable systems, and the analysis methods that make MEG data clinically useful.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ──────────────────────────────────────────────────────────────── -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="split">
+      <div class="fade-in prose">
+        <span class="eyebrow">About the Consortium</span>
+        <div class="split-decorator"></div>
+        <h2 class="section-title">From a Regional Group to a National Network</h2>
+        <p class="section-sub">Formerly the MEG Texas Consortium</p>
+        <p>The MEG Translational Research Consortium (MEG-TREC) grew out of the MEG Texas Consortium. It was renamed to reflect its national expansion and its growing role in magnetoencephalography research, clinical applications, and technology development.</p>
+        <p>Each year the consortium holds a meeting that brings together clinicians, researchers, and industry professionals for keynote lectures, panel presentations, research discussions, and networking. Registration has been free, with an RSVP required.</p>
+        <div class="mt-4">
+          <a href="about.html" class="btn btn-navy">Read More</a>
+        </div>
+      </div>
+      <!-- Figure: schematic of a whole head MEG sensor layout seen from above -->
+      <figure class="split-figure fade-in" style="transition-delay:.15s">
+        <svg viewBox="0 0 400 400" aria-label="Schematic top view of a whole head MEG sensor array" role="img">
+          <circle cx="200" cy="210" r="160" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/>
+          <path d="M180 52 L200 30 L220 52" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/>
+          <path d="M40 195 q-14 15 0 30 M360 195 q14 15 0 30" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/>
+          <g id="figureDots" fill="currentColor"></g>
+        </svg>
+        <figcaption>Schematic top view of a whole head sensor array</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOCUS AREAS ────────────────────────────────────────────────────────── -->
+<section class="section dark-section" id="focus">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:3rem">
+      <span class="eyebrow">Focus Areas</span>
+      <h2 class="section-title">Where MEG Makes a Difference</h2>
+      <p class="section-sub">Topics represented at consortium meetings</p>
+      <div class="divider divider-center"></div>
+    </div>
+    <div class="tile-grid">
+      <div class="tile fade-in">
+        <h3>Epilepsy</h3>
+        <p>Localizing interictal and ictal activity to guide presurgical planning.</p>
+      </div>
+      <div class="tile fade-in" style="transition-delay:.06s">
+        <h3>Neurodevelopment</h3>
+        <p>Studying how brain networks form and change across childhood.</p>
+      </div>
+      <div class="tile fade-in" style="transition-delay:.12s">
+        <h3>Aging and Neurodegeneration</h3>
+        <p>Investigating network changes that may signal disease before symptoms appear.</p>
+      </div>
+      <div class="tile fade-in" style="transition-delay:.18s">
+        <h3>Functional Mapping</h3>
+        <p>Identifying sensory, motor, and language cortex before neurosurgery.</p>
+      </div>
+      <div class="tile fade-in" style="transition-delay:.24s">
+        <h3>Brain Computer Interfaces</h3>
+        <p>Using the temporal resolution of MEG to decode brain activity.</p>
+      </div>
+      <div class="tile fade-in" style="transition-delay:.3s">
+        <h3>MEG Technology</h3>
+        <p>New sensors, wearable systems, and advanced analysis methods.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MOST RECENT MEETING ────────────────────────────────────────────────── -->
+<section class="section section-alt" id="meeting">
+  <div class="container">
+    <div class="text-center mb-4">
+      <span class="eyebrow">Annual Meeting</span>
+      <h2 class="section-title">MEG-TREC 2026</h2>
+      <div class="divider divider-center"></div>
+    </div>
+    <div class="meeting-card fade-in prose">
+      <h3>4th Annual MEG-TREC Meeting</h3>
+      <p class="meeting-meta">June 5, 2026 &middot; Le Bonheur Children's Hospital &middot; Memphis, Tennessee</p>
+      <p>Hosted by the Le Bonheur Children's Hospital Neuroscience Institute, the 2026 meeting featured keynote addresses and panel presentations on current trends in clinical and translational MEG research. Information about the next annual meeting will be posted here when it is available.</p>
+      <div class="mt-4">
+        <a href="meetings.html" class="btn btn-navy">All Meetings</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CALL TO ACTION ─────────────────────────────────────────────────────── -->
+<div class="cta-band">
+  <div class="container">
+    <h2>New to Magnetoencephalography?</h2>
+    <p>Our educational resource covers the physics of the MEG signal, instrumentation, source modeling, and clinical applications.</p>
+    <a href="meg.html" class="btn btn-outline">MEG Principles and Techniques</a>
+  </div>
+</div>
+
+<!-- ─── FOOTER (same block on every page) ──────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">MEG<span>-TREC</span></div>
+        <p class="footer-tagline">MEG Translational Research Consortium</p>
+        <p style="margin-top:1rem;font-size:.92rem">Formerly the MEG Texas Consortium</p>
+      </div>
+      <div class="footer-col">
+        <h4>Consortium</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="board.html">Board Members</a></li>
+          <li><a href="meetings.html">Annual Meetings</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="meg.html#signal">The MEG Signal</a></li>
+          <li><a href="meg.html#instrumentation">Instrumentation</a></li>
+          <li><a href="meg.html#source">Source Modeling</a></li>
+          <li><a href="meg.html#clinical">Clinical Applications</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 MEG Translational Research Consortium</span>
+      <span>MEG-TREC</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+  /* Draws sensor dots on concentric rings inside an SVG group.
+     groupId: id of the <g> element to fill
+     cx, cy:  center of the array in SVG units
+     rings:   array of [radius, count] pairs, one per ring */
+  function drawSensorRings(groupId, cx, cy, rings, dotRadius) {
+    const g = document.getElementById(groupId);
+    if (!g) return;                       // nothing to draw into on this page
+    const ns = 'http://www.w3.org/2000/svg';
+    rings.forEach(([radius, count]) => {
+      if (count <= 0) return;             // guard against an empty ring
+      for (let i = 0; i < count; i++) {
+        const angle = (2 * Math.PI * i) / count;
+        const dot = document.createElementNS(ns, 'circle');
+        dot.setAttribute('cx', (cx + radius * Math.cos(angle)).toFixed(1));
+        dot.setAttribute('cy', (cy + radius * Math.sin(angle)).toFixed(1));
+        dot.setAttribute('r', dotRadius);
+        g.appendChild(dot);
+      }
+    });
+  }
+  // Hero artwork and the about figure use the same ring layout at different scales
+  drawSensorRings('sensorDots', 940, 360, [[60, 8], [120, 16], [180, 24], [240, 32], [285, 38]], 3);
+  drawSensorRings('figureDots', 200, 210, [[0, 1], [32, 8], [64, 14], [96, 20], [128, 26], [150, 30]], 4);
+</script>
+</body>
+</html>
