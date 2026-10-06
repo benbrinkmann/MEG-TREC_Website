@@ -517,8 +517,21 @@ sup.ref a { text-decoration: none; font-family: var(--ff-sans); font-size: .7rem
 }
 .member-photo + .member-initials { display: none; }
 .member { display: flex; flex-direction: column; }
-.member-link {
+.member-location {
+  font-family: var(--ff-sans);
+  font-size: .8rem !important;
+  color: var(--muted) !important;
+  margin-top: .25rem;
+}
+.member .member-titles { font-size: .9rem; margin-top: .75rem; line-height: 1.45; }
+.member-links {
   margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .4rem 1.25rem;
+}
+.member-link {
   font-family: var(--ff-sans);
   font-size: .75rem;
   font-weight: 600;
