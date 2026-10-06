@@ -39,7 +39,6 @@ No build step is needed; every page is plain HTML.
 - Dates and location of the next annual meeting.
 - MEG system photo saved as `images/meg-system.jpg`, with a photo credit in the caption on `index.html`.
 - Board headshots in `images/board/` (file names listed in that folder's README).
-- Google Scholar profile for Roozbeh Rezaie; his card currently links to a Scholar search.
 - A logo, if one exists; the site currently uses a text wordmark and an inline SVG favicon.
 
 ## Deployment on GitHub Pages
