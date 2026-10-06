@@ -13,6 +13,12 @@ MEG-TREC_Website/
 ├── meg.html        # Educational resource: MEG principles and techniques
 ├── style.css       # Shared stylesheet (colors and fonts set in :root)
 ├── site.js         # Shared script: mobile menu, fade-ins, sidebar highlighting
+├── images/
+│   ├── dipole-map.png   # 3D dipole field map (home page)
+│   ├── meg-system.jpg   # MEG system photo (add; drawing shows until then)
+│   └── board/           # Board headshots, see images/board/README.md
+├── tools/
+│   └── make_dipole_map.py  # Regenerates images/dipole-map.png
 ├── .nojekyll       # Tells GitHub Pages to serve files as is
 └── README.md
 ```
@@ -31,6 +37,9 @@ No build step is needed; every page is plain HTML.
 
 - Contact email for the consortium (none is listed yet).
 - Dates and location of the next annual meeting.
+- MEG system photo saved as `images/meg-system.jpg`, with a photo credit in the caption on `index.html`.
+- Board headshots in `images/board/` (file names listed in that folder's README).
+- Google Scholar profiles for Roozbeh Rezaie and Amy Proskovec; their cards currently link to a Scholar search.
 - A logo, if one exists; the site currently uses a text wordmark and an inline SVG favicon.
 
 ## Deployment on GitHub Pages

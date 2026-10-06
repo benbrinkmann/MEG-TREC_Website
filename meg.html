@@ -67,7 +67,7 @@
         <div class="content-group" id="overview">
           <h2 class="content-group-title">What Is MEG?</h2>
           <p>Magnetoencephalography (MEG) measures the magnetic fields produced by electrical activity in the brain. Sensors placed just outside the head record these fields with millisecond temporal resolution, and mathematical models are then used to estimate where in the brain the activity arose. MEG is completely noninvasive: it emits nothing and simply listens to the brain's own magnetic signals.<sup class="ref"><a href="#ref1">1,2</a></sup></p>
-          <p>The first recording of the brain's magnetic field was reported by David Cohen in 1968 using an induction coil magnetometer.<sup class="ref"><a href="#ref3">3</a></sup> In 1972 he recorded the alpha rhythm with a superconducting quantum interference device (SQUID) inside a magnetically shielded room, the basic arrangement that most clinical systems still use.<sup class="ref"><a href="#ref4">4</a></sup> Modern whole head systems contain a few hundred sensors arranged in a helmet that covers the scalp.</p>
+          <p>The first recording of the brain's magnetic field was reported by David Cohen in 1968 using an induction coil magnetometer.<sup class="ref"><a href="#ref3">3</a></sup> In 1972 he recorded the alpha rhythm with a superconducting quantum interference device (SQUID) inside a magnetically shielded room, the basic arrangement that most clinical systems still use.<sup class="ref"><a href="#ref4">4</a></sup> Modern whole-head systems contain a few hundred sensors arranged in a helmet that covers the scalp.</p>
           <div class="callout">
             <strong>In one sentence:</strong> MEG offers the temporal resolution of EEG with spatial information that is less distorted by the skull and scalp, at the cost of more demanding instrumentation.
           </div>
@@ -133,7 +133,7 @@
           <h2 class="content-group-title">Field Strength and Shielding</h2>
           <p>Brain magnetic fields are extremely small, in the range of tens to a few thousand femtotesla (1 fT = 10<sup>&minus;15</sup> tesla). The Earth's static field is roughly a billion times stronger, and the fluctuating fields from traffic, elevators, and power lines are also much larger than the brain signal.<sup class="ref"><a href="#ref1">1</a></sup> Recording MEG therefore depends on several layers of noise reduction:</p>
           <ul class="bullets">
-            <li><strong>Magnetically shielded rooms</strong> built from layers of high permeability alloy (mu metal) and aluminum attenuate external fields.</li>
+            <li><strong>Magnetically shielded rooms</strong> built from layers of high-permeability alloy (mu metal) and aluminum attenuate external fields.</li>
             <li><strong>Gradiometer sensors</strong> respond to differences in field over a short distance, which suppresses distant noise sources while preserving nearby brain signals.</li>
             <li><strong>Reference sensors and software methods</strong> such as signal space separation remove residual interference after recording (see <a href="#preprocessing">Preprocessing</a>).</li>
           </ul>
@@ -181,13 +181,13 @@
         <div class="content-group" id="instrumentation">
           <h2 class="content-group-title">Instrumentation</h2>
           <h3>SQUID sensors</h3>
-          <p>Conventional MEG systems detect magnetic fields with SQUIDs, superconducting circuits that convert very small changes in magnetic flux into a measurable voltage. Each SQUID is coupled to a pickup coil (the "flux transformer") whose geometry determines what the sensor measures. SQUIDs must be kept superconducting at about 4 kelvin, so the sensors sit in a helmet shaped dewar filled with liquid helium, typically 2 to 3 cm from the scalp.<sup class="ref"><a href="#ref1">1,2</a></sup></p>
+          <p>Conventional MEG systems detect magnetic fields with SQUIDs, superconducting circuits that convert very small changes in magnetic flux into a measurable voltage. Each SQUID is coupled to a pickup coil (the "flux transformer") whose geometry determines what the sensor measures. SQUIDs must be kept superconducting at about 4 kelvin, so the sensors sit in a helmet-shaped dewar filled with liquid helium, typically 2 to 3 cm from the scalp.<sup class="ref"><a href="#ref1">1,2</a></sup></p>
 
           <h3>Pickup coil geometries</h3>
           <ul class="bullets">
             <li><strong>Magnetometers</strong> use a single loop and measure the field component through it. They are sensitive to deep sources and also to distant noise.</li>
             <li><strong>Axial gradiometers</strong> use two coaxial loops wound in opposite directions, so that uniform fields cancel and fields from nearby sources remain.</li>
-            <li><strong>Planar gradiometers</strong> use a figure eight coil that measures the field gradient along the scalp. They give their largest signal directly over a source and are less sensitive to deep sources.</li>
+            <li><strong>Planar gradiometers</strong> use a figure-eight coil that measures the field gradient along the scalp. They give their largest signal directly over a source and are less sensitive to deep sources.</li>
           </ul>
           <p>Commercial systems differ in how they combine these. For example, MEGIN (formerly Elekta Neuromag) systems contain 306 channels at 102 locations, each with one magnetometer and two orthogonal planar gradiometers, while CTF systems use roughly 275 axial gradiometers.</p>
 
@@ -336,7 +336,7 @@
                 <tr><td>Effect of skull and scalp</td><td>Small; fields pass through with little distortion</td><td>Substantial smearing of potentials</td></tr>
                 <tr><td>Reference</td><td>Reference free</td><td>Depends on reference choice</td></tr>
                 <tr><td>Sensitivity to deep sources</td><td>Lower</td><td>Somewhat higher</td></tr>
-                <tr><td>Long term monitoring</td><td>Generally limited to hours</td><td>Days, including ambulatory and implanted systems</td></tr>
+                <tr><td>Long-term monitoring</td><td>Generally limited to hours</td><td>Days, including ambulatory and implanted systems</td></tr>
                 <tr><td>Cost and availability</td><td>High cost; available at specialized centers</td><td>Low cost; widely available</td></tr>
               </tbody>
             </table>
@@ -347,7 +347,7 @@
         <div class="content-group" id="clinical">
           <h2 class="content-group-title">Clinical Applications</h2>
           <h3>Presurgical evaluation of epilepsy</h3>
-          <p>The most common clinical use of MEG is localizing interictal epileptiform discharges in patients with drug resistant focal epilepsy who are being considered for surgery. Dipoles fitted to individual spikes are displayed on the patient's MRI, and a tight cluster of dipoles with consistent orientation supports a focal generator. MEG findings can direct a second look at an MRI that was initially read as normal, help generate hypotheses for intracranial electrode placement such as stereo EEG, and add confidence when concordant with other tests.<sup class="ref"><a href="#ref8">8</a></sup> Seizures are occasionally captured during MEG and can also be analyzed.</p>
+          <p>The most common clinical use of MEG is localizing interictal epileptiform discharges in patients with drug-resistant focal epilepsy who are being considered for surgery. Dipoles fitted to individual spikes are displayed on the patient's MRI, and a tight cluster of dipoles with consistent orientation supports a focal generator. MEG findings can direct a second look at an MRI that was initially read as normal, help generate hypotheses for intracranial electrode placement such as stereo EEG, and add confidence when concordant with other tests.<sup class="ref"><a href="#ref8">8</a></sup> Seizures are occasionally captured during MEG and can also be analyzed.</p>
 
           <h3>Presurgical functional mapping</h3>
           <p>MEG can identify eloquent cortex before resection of tumors, vascular lesions, or epileptic foci, reducing the risk of postoperative deficits. Established protocols map somatosensory cortex with median nerve or tactile stimulation, auditory cortex with tones, visual cortex with patterned stimuli, and motor cortex with voluntary movement. Language tasks can help establish hemispheric dominance and localize receptive language areas, often as a complement to other methods such as functional MRI or the intracarotid amobarbital procedure.</p>
@@ -373,9 +373,9 @@
         <!-- ── 11. SOFTWARE ────────────────────────────────────────────── -->
         <div class="content-group" id="software">
           <h2 class="content-group-title">Analysis Software</h2>
-          <p>In addition to the clinical software supplied by MEG manufacturers, several open source packages are widely used. Each offers tutorials with sample data:</p>
+          <p>In addition to the clinical software supplied by MEG manufacturers, several open-source packages are widely used. Each offers tutorials with sample data:</p>
           <ul class="bullets">
-            <li><a href="https://neuroimage.usc.edu/brainstorm/" target="_blank" rel="noopener">Brainstorm</a>: a graphical application (MATLAB based, with a compiled version) for MEG, EEG, and intracranial EEG analysis.</li>
+            <li><a href="https://neuroimage.usc.edu/brainstorm/" target="_blank" rel="noopener">Brainstorm</a>: a graphical application (MATLAB-based, with a compiled version) for MEG, EEG, and intracranial EEG analysis.</li>
             <li><a href="https://mne.tools/" target="_blank" rel="noopener">MNE-Python</a>: a Python package covering preprocessing, source estimation, and statistics.</li>
             <li><a href="https://www.fieldtriptoolbox.org/" target="_blank" rel="noopener">FieldTrip</a>: a MATLAB toolbox for MEG, EEG, and invasive electrophysiology.</li>
             <li><a href="https://www.fil.ion.ucl.ac.uk/spm/" target="_blank" rel="noopener">SPM</a>: statistical parametric mapping, including MEG and EEG source reconstruction and dynamic causal modeling.</li>

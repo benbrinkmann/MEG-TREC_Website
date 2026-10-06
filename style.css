@@ -297,6 +297,25 @@ ul { list-style: none; }
   text-align: center;
 }
 
+/* Photo slot: shows the photo when the image file exists; otherwise the
+   img onerror handler adds .no-photo and the SVG drawing is shown instead. */
+.photo-slot img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.photo-slot .photo-fallback,
+.photo-slot .fallback-caption { display: none; }
+.photo-slot.no-photo img,
+.photo-slot.no-photo .photo-caption { display: none; }
+.photo-slot.no-photo .photo-fallback { display: block; }
+.photo-slot.no-photo .fallback-caption { display: inline; }
+
+/* Rendered 3D dipole map (dark background already matches --navy) */
+.dipole-figure { padding: 1.25rem; }
+.dipole-figure img { width: 100%; height: auto; }
+
 /* ─── DARK BAND (focus areas, call to action) ───────────────────────────────── */
 .dark-section {
   background: var(--navy);
@@ -464,6 +483,7 @@ sup.ref a { text-decoration: none; font-family: var(--ff-sans); font-size: .7rem
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
+  align-items: start;      /* a longer card does not stretch its whole row */
 }
 .member {
   background: var(--white);
@@ -474,19 +494,50 @@ sup.ref a { text-decoration: none; font-family: var(--ff-sans); font-size: .7rem
   text-align: center;
 }
 .member-initials {
-  width: 64px; height: 64px;
+  width: 120px; height: 120px;
   margin: 0 auto 1rem;
   border-radius: 50%;
   background: var(--navy);
   color: var(--teal-light);
   font-family: var(--ff-sans);
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.8rem;
   letter-spacing: .06em;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+/* Headshot: when present, it hides the initials placed right after it */
+.member-photo {
+  width: 120px; height: 120px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--mist);
+}
+.member-photo + .member-initials { display: none; }
+.member { display: flex; flex-direction: column; }
+.member-link {
+  margin-top: 1rem;
+  font-family: var(--ff-sans);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.member-link:hover { color: var(--navy); text-decoration: underline; text-underline-offset: 3px; }
+.member-details {
+  text-align: left;
+  list-style: disc;
+  padding-left: 1.1rem;
+  margin: .9rem 0 .5rem;
+  font-size: .9rem;
+  color: var(--slate);
+  line-height: 1.45;
+}
+.member-details li { margin-bottom: .35rem; }
+.member .member-bio { text-align: left; font-size: .9rem; margin-top: .5rem; }
 .member h3 { font-family: var(--ff-display); font-size: 1.12rem; color: var(--navy); margin-bottom: .35rem; }
 .member p { font-size: .95rem; color: var(--slate); line-height: 1.5; }
 .member .member-role {
